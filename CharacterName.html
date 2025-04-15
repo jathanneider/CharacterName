@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Character Name</title>
+  <!-- Load Vue.js from CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  <style>
+    /* Basic reset and styling */
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #f0f0f0;
+      margin: 0;
+    }
+    .container {
+      text-align: center;
+      background: #fff;
+      padding: 2em;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    input {
+      padding: 0.5em;
+      font-size: 1em;
+      margin-right: 0.5em;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      padding: 0.5em 1em;
+      font-size: 1em;
+      border: none;
+      border-radius: 4px;
+      background-color: #4285f4;
+      color: #fff;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #357ae8;
+    }
+
+    /* Bounce animation for the whole character */
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+
+    /* Character container */
+    .character {
+      display: inline-block;
+      position: relative;
+      animation: bounce 2s infinite;
+      margin: 20px auto 100px;
+    }
+
+    /* Head styling */
+    .head {
+      width: 150px;
+      height: 150px;
+      background-color: #ffcccb;
+      border-radius: 50%;
+      position: relative;
+      margin: 0 auto;
+      box-shadow: inset 0 0 0 3px #fff;
+    }
+
+    /* Eyes styling */
+    .eye {
+      width: 20px;
+      height: 20px;
+      background: #fff;
+      border: 2px solid #000;
+      border-radius: 50%;
+      position: absolute;
+      top: 50px;
+    }
+    .eye.left {
+      left: 35px;
+    }
+    .eye.right {
+      right: 35px;
+    }
+    .eye::after {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background: #000;
+      border-radius: 50%;
+      position: absolute;
+      top: 4px;
+      left: 4px;
+    }
+
+    /* Mouth styling */
+    .mouth {
+      width: 60px;
+      height: 30px;
+      border-bottom: 4px solid #000;
+      border-radius: 0 0 50px 50px;
+      position: absolute;
+      left: 50%;
+      bottom: 35px;
+      transform: translateX(-50%);
+    }
+
+    /* Body styling */
+    .body {
+      width: 100px;
+      height: 120px;
+      background: #3498db;
+      margin: 0 auto;
+      border-radius: 10px;
+      margin-top: -20px;
+      position: relative;
+    }
+
+    /* Arms styling */
+    .arm {
+      width: 20px;
+      height: 60px;
+      background: #ffcccb;
+      position: absolute;
+      top: 20px;
+      border-radius: 20px;
+    }
+    .arm.left {
+      left: -20px;
+      transform: rotate(-30deg);
+    }
+    .arm.right {
+      right: -20px;
+      transform: rotate(30deg);
+    }
+
+    /* Legs styling */
+    .leg {
+      width: 20px;
+      height: 60px;
+      background: #3498db;
+      position: absolute;
+      bottom: -60px;
+      border-radius: 10px;
+    }
+    .leg.left {
+      left: 20px;
+    }
+    .leg.right {
+      right: 20px;
+    }
+
+    /* Name label styling */
+    .name-label {
+      font-size: 1.1em;
+      margin-top: 10px;
+      font-weight: bold;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+<div id="app" class="container">
+  <h1>Welcome!</h1>
+  <!-- Input form when name is not submitted -->
+  <div v-if="!submitted">
+    <input type="text" v-model="userName" placeholder="Enter your name" />
+    <button @click="submitName">Submit</button>
+  </div>
+  <!-- Display the animated, personified character after submission -->
+  <div v-else>
+    <div class="character">
+      <div class="head">
+        <div class="eye left"></div>
+        <div class="eye right"></div>
+        <div class="mouth"></div>
+      </div>
+      <div class="body">
+        <div class="arm left"></div>
+        <div class="arm right"></div>
+        <div class="leg left"></div>
+        <div class="leg right"></div>
+      </div>
+    </div>
+    <p class="name-label">Hello, {{ userName }}!</p>
+    <button @click="reset">Reset</button>
+  </div>
+</div>
+
+<script>
+  // Initialize Vue instance
+  new Vue({
+    el: '#app',
+    data: {
+      userName: '',
+      submitted: false
+    },
+    methods: {
+      submitName() {
+        if (this.userName.trim() !== '') {
+          this.submitted = true;
+        }
+      },
+      reset() {
+        this.userName = '';
+        this.submitted = false;
+      }
+    }
+  });
+</script>
+</body>
+</html>
