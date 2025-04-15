@@ -1,4 +1,4 @@
-Basic HTML based web app using Vue.js to manage functions within the app.
+Basic HTML based web app using Vue.js to manage functions within the app. App allows user to submit a name, that names the character on the following screen.
 
 # TO RUN:
 
